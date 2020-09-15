@@ -1,0 +1,59 @@
+# Role-Based Authorization
+
+[toc]
+
+Specify and enforce user access rights to resources. ContractorMS has different levels of user access:
+
+## Administrator
+
+### Roles and Responsibilities
+
+1. Manage the ContractorMS application for the organization.
+2. Configure preferences and settings to tailor ContractorMS to suit the company's business-specific needs, processes, and workflows.
+3. Choose an internal implementation team (aka ContractorMS committee), to get together to discuss how to successfully roll out ContractorMS to the rest of the organization.
+
+### Company level tool functions
+
+#### Expense Allocations
+
+* Designed for ContractorMS clients who need to provide a statement of cost allocation to an owner for reimbursement.
+* This feature will provide the user with a statement of cost allocation for the company's projects. 
+* This ensures that a company has the proper PDF documentation to recover the cost of the construction investment.
+
+For more information see:
+
+* [Create a New Expense Allocation](Create a New Expense Allocation.pdf)
+
+### Configuring tool settings
+
+#### Classifications settings
+
+- Admin user should only see Classifications if the Timesheets tool is enabled on an organization's a/c. 
+- Admin can add new Classification names for their company.
+- Classifications names associate classifications to employees and workers on timesheets and timecards.
+- Classifications can be viewed by the admin on the Daily Timecards Log.
+
+### Choosing members of the company's ContractorMS committee
+
+The company's ContractorMS committee is the small group attending the ContractorMS implementation call series. They will serve as a valuable training/support resource, as well as provide insightful guidance when defining the company's best practices.
+
+The Administrator should consider the following points when deciding who to include on the ContractorMS committee:
+
+1. Who is responsible for defining projects' standard operating procedures?
+2. What is the workflow for getting projects set up? (*E.g The ContractorMS Company Level Admin creates projects and adds the key Project Manager. The Project Manager then adds users and begins the project*)
+3. Who is responsible if more people need to be added throughout the course of the project?
+
+For more information on rollout and ContractorMS committees see [Define a Procore Rollout Strategy](Define a Procore Rollout Strategy.pdf)
+
+### Setting appropriate permissions for team members
+
+### Creating templates to be used on projects
+
+### Importing data to a company's a/c
+
+### Defining essential settings for the ContractorMS solution.
+
+### Adding individual cost codes or importing existing codes from a CSV file to use on company-wide projects.
+
+### Configuring system preferences for bidding, contracts, change orders, submittals, trades, and more.
+
