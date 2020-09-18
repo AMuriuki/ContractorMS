@@ -15,7 +15,7 @@ login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message = 'Please log in to access this page.'
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
+security = Security()
 
 
 def create_app(Config_class=Config):
@@ -25,6 +25,7 @@ def create_app(Config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    security.init_app(app, user_datastore)
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
