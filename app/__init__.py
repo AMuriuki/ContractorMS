@@ -7,13 +7,16 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_security import RoleMixin, UserMixin, Security, SQLAlchemyUserDatastore
-from app.models import User, Role
+
 
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message = 'Please log in to access this page.'
+babel = Babel()
+
+from app.models import User, Role
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security()
 
@@ -25,6 +28,7 @@ def create_app(Config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    babel.init_app(app)
     security.init_app(app, user_datastore)
 
     from app.errors import bp as errors_bp
@@ -68,5 +72,23 @@ def create_app(Config_class=Config):
 
     return app
 
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+
+
+app = create_app()
+@app.before_first_request
+def create_user():
+    user = db.session.query(User).filter_by(email='arnoldnderitu@gmail.com').first()
+    if user:
+        pass
+    else:
+        first_user = user_datastore.create_user(username='Super Admin', email='arnoldnderitu@gmail.com')
+        user_datastore.toggle_active(first_user)
+        first_user.set_password('admin')
+        db.session.commit()
+    
 
 from app import models
