@@ -3,17 +3,15 @@ from hashlib import md5
 from time import time
 from flask import current_app
 # from flask_login import UserMixin
-from flask_security import RoleMixin, UserMixin
-
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from app import db, login
 
-#helper table for many-to-many relationship
+# helper table for many-to-many relationship
 user_roles_table = db.Table('user_roles',
                             db.column('user_id', db.Integer(),
                                       db.ForeignKey('user.id')),
-                            db.Column('roles_id', db.Integer(), db.ForeignKey('roles.id')))
+                            db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
 class User(UserMixin, db.Model):
@@ -25,7 +23,7 @@ class User(UserMixin, db.Model):
     active = db.Column(db.Boolean())
     password_hash = db.Column(db.String(128))
     roles = db.relationship(
-        'Roles', secondary=user_roles_table, backref='user', lazy=True)
+        'Role', secondary=user_roles_table, backref='user', lazy=True)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -62,7 +60,7 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-class Roles(db.Model, RoleMixin):
+class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
