@@ -135,6 +135,7 @@ def build_sample_db():
                 user = User(
                     first_name = first_names[i],
                     last_name = last_names[i],
+                    username = first_names[i],
                     email = tmp_email,
                     password_hash = generate_password_hash(tmp_pass),
                     roles = [user_role, ]

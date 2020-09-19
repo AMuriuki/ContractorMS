@@ -5,8 +5,12 @@ from flask import flash, url_for, redirect
 def admin_required(function):
     @wraps(function)
     def wrap(*args, **kwargs):
-        print (current_user.role)
-        if current_user.role == "superuser":
+        roles = []
+        user_roles = current_user.roles
+        for user_role in user_roles:
+            roles.append(user_role.name)
+            print(roles)
+        if "superuser" in roles:
             return function(*args, **kwargs)
         else:
             flash("You need superuser access to view this page")

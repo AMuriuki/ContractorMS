@@ -9,7 +9,11 @@ from app.models import User, Role
 
 class UserModelView(ModelView):
     def is_accessible(self):
-        return (current_user.is_active and current_user.is_authenticated and c)
+        roles = []
+        user_roles = current_user.roles
+        for user_role in user_roles:
+            roles.append(user_role.name)            
+        return (current_user.is_active and current_user.is_authenticated and "superuser" in roles)
 
     def _handle_view(self, name):
         if not self.is_accessible():
@@ -18,12 +22,12 @@ class UserModelView(ModelView):
 
 class _AdminIndexView(AdminIndexView):
     def is_accessible(self):
-        return (current_user.is_active and current_user.is_authenticated)
+        roles = []
+        user_roles = current_user.roles
+        for user_role in user_roles:
+            roles.append(user_role.name)            
+        return (current_user.is_active and current_user.is_authenticated and "superuser" in roles)
 
     def _handle_view(self, name):
         if not self.is_accessible():
             return redirect(url_for('auth.login'))
-
-
-# admin.add_view(UserModelView(User, db.session))
-# admin.add_view(UserModelView(Role, db.session))

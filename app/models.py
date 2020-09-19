@@ -33,7 +33,7 @@ class User(UserMixin, db.Model):
     active = db.Column(db.Boolean())
     password_hash = db.Column(db.String(128))
     roles = db.relationship(
-        'Role', secondary=user_roles, backref='user', lazy=True)
+        'Role', secondary=user_roles, backref='role', lazy=True)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
