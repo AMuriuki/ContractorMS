@@ -2,8 +2,7 @@ from datetime import datetime
 from hashlib import md5
 from time import time
 from flask import current_app
-# from flask_login import UserMixin
-from flask_security import UserMixin, RoleMixin
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from app import db, login
@@ -16,7 +15,7 @@ user_roles = db.Table(
 )
 
 
-class Role(db.Model, RoleMixin):
+class Role(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
