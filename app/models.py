@@ -24,6 +24,9 @@ class Role(db.Model, RoleMixin):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(64), index=True)
+    last_name = db.Column(db.String(64), index=True)
+    middle_name = db.Column(db.String(64), index=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     about_me = db.Column(db.String(140))
